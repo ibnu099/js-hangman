@@ -31,13 +31,27 @@ Hangman.prototype.guessing = function (char) {
     }
 }
 
+
 const one = new Hangman('Cat', 2)
-console.log(one.getPuzzle())
-console.log(one.remainingGuesses)
+
+const renderPuzzleDOM = () => {
+    const puzzle = document.createElement('p')
+    const chance = document.createElement('p')
+
+    document.querySelector('#puzzle').innerHTML = ''
+    puzzle.textContent = one.getPuzzle()
+    document.querySelector('#puzzle').appendChild(puzzle)
+
+    document.querySelector('#chance').innerHTML = ''
+    chance.textContent = one.remainingGuesses
+    document.querySelector('#chance').appendChild(chance)
+}
+
+renderPuzzleDOM()
+
 
 window.addEventListener('keypress', function(e){
     const guess = String.fromCharCode(e.charCode)
     one.guessing(guess)
-    console.log(one.getPuzzle())
-    console.log(one.remainingGuesses)
+    renderPuzzleDOM()
 })
